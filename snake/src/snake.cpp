@@ -1,7 +1,8 @@
 #include "snake.h"
+#include "game.h"
 
 const int cell_size = 30;
-const int cell_count = 25;
+const int cell_count = 30;
 const int offset = 75;
 
 const Color green = {173, 204, 96, 255};
@@ -40,4 +41,5 @@ void Snake::Update() {
 void Snake::Reset() {
   body = {Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
   direction = {1, 0};
+  update_interval = 0.2f;
 }

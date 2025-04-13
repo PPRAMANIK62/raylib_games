@@ -23,6 +23,9 @@ class Game {
 };
 
 extern double last_update_time;
+extern double update_interval;
+extern const double speed_increment;
+extern const double min_interval;
 extern bool EventTriggered(double interval);
 
 #endif

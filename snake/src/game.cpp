@@ -2,7 +2,10 @@
 #include<raymath.h>
 #include<deque>
 
-double last_update_time = 0;
+double last_update_time = 0.0f;
+double update_interval = 0.2f;
+const double speed_increment = 0.01f;
+const double min_interval = 0.08f;
 
 bool EventTriggered(double interval) {
   double current_time = GetTime();

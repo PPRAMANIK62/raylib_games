@@ -15,8 +15,22 @@ int main() {
   while (!WindowShouldClose()) {
     BeginDrawing();
 
+    if (EventTriggered(update_interval)) {
+      allow_move = true;
+
+      // save score before update
+      int prev_score = game.score;
+
+      game.Update();
+
+      // if food was eaten increase speed
+      if (game.score > prev_score && update_interval > min_interval) {
+        update_interval -= speed_increment;
+      }
+    }
+
     // Game start
-    if (EventTriggered(0.2)) {
+    if (EventTriggered(update_interval)) {
       allow_move = true;
       game.Update();
     }
@@ -83,7 +97,7 @@ int main() {
     );
     DrawText(
       TextFormat("%i", game.score),
-      offset - 5,
+      offset + cell_size * cell_count - 15,
       offset + cell_size * cell_count + 10,
       40,
       dark_green
