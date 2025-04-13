@@ -10,6 +10,8 @@ class Game {
     Food food = Food(snake.body);
     bool running = true;
     int score = 0;
+    Sound eat_sound;
+    Sound wall_sound;
 
     Game();
     ~Game();

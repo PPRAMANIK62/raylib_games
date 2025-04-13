@@ -17,11 +17,15 @@ bool EventTriggered(double interval) {
 }
 
 Game::Game() {
-  // TODO: Init audio device
+  InitAudioDevice();
+  eat_sound = LoadSound("sounds/eat.mp3");
+  wall_sound = LoadSound("sounds/wall.mp3");
 }
 
 Game::~Game() {
-  // TODO: Close audio device
+  UnloadSound(eat_sound);
+  UnloadSound(wall_sound);
+  CloseAudioDevice();
 }
 
 void Game::Draw() {
@@ -43,7 +47,7 @@ void Game::CheckCollisionWithFood() {
     food.position = food.GenerateRandomPosition(snake.body);
     snake.add_segment = true;
     score++;
-    // TODO: Play sound
+    PlaySound(eat_sound);
   }
 }
 
@@ -63,7 +67,7 @@ void Game::GameOver() {
   food.position = food.GenerateRandomPosition(snake.body);
   running = false;
   score = 0;
-  // TODO: Play sound
+  PlaySound(wall_sound);
 }
 
 void Game::CheckCollisionWithTail() {
