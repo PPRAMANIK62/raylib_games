@@ -3,6 +3,7 @@
 
 #include "snake.h"
 #include "food.h"
+#include<fstream>
 
 class Game {
   public:
@@ -28,6 +29,9 @@ extern double last_update_time;
 extern double update_interval;
 extern const double speed_increment;
 extern const double min_interval;
+
 extern bool EventTriggered(double interval);
+extern int LoadHighScore();
+extern void SaveHighScore(int score);
 
 #endif

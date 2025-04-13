@@ -78,3 +78,21 @@ void Game::CheckCollisionWithTail() {
     GameOver();
   }
 }
+
+int LoadHighScore() {
+  std::ifstream file("highscore.txt");
+
+  int score = 0;
+  if (file.is_open()) {
+    file >> score;
+  }
+  return score;
+}
+
+void SaveHighScore(int score) {
+  std::ofstream file("highscore.txt");
+
+  if (file.is_open()) {
+    file << score;
+  }
+}

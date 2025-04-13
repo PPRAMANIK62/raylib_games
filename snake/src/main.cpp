@@ -11,6 +11,7 @@ int main() {
   SetTargetFPS(60);
 
   Game game = Game();
+  int high_score = LoadHighScore();
 
   while (!WindowShouldClose()) {
     BeginDrawing();
@@ -20,12 +21,19 @@ int main() {
 
       // save score before update
       int prev_score = game.score;
-
       game.Update();
 
       // if food was eaten increase speed
-      if (game.score > prev_score && update_interval > min_interval) {
-        update_interval -= speed_increment;
+      if (game.score > prev_score) {
+        if (update_interval > min_interval) {
+          update_interval -= speed_increment;
+        }
+
+        // update high score if needed
+        if (game.score > high_score) {
+          high_score = game.score;
+          SaveHighScore(high_score);
+        }
       }
     }
 
@@ -98,6 +106,13 @@ int main() {
     DrawText(
       TextFormat("%i", game.score),
       offset + cell_size * cell_count - 15,
+      offset + cell_size * cell_count + 10,
+      40,
+      dark_green
+    );
+    DrawText(
+      TextFormat("High Score: %i", high_score),
+      (offset + cell_size * cell_count) / 2,
       offset + cell_size * cell_count + 10,
       40,
       dark_green
